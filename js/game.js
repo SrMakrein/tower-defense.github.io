@@ -191,7 +191,8 @@ const Game = (() => {
                 
                 // Iniciar la onda realmente
                 spawnState.waveActive = true;
-                spawnState.enemiesToSpawn = isBossWave ? 1 : levelInfo.enemyCount;
+                // En oleadas boss: 1 boss + N elites (N = nivel). En oleadas normales: todos los minions
+                spawnState.enemiesToSpawn = isBossWave ? (1 + levelInfo.level) : levelInfo.enemyCount;
                 spawnState.originalEnemyCount = levelInfo.enemyCount; // Guardar para detectar barracones después
                 spawnState.spawnTimer = 0;
                 spawnState.waveTotalHealth = 0;
@@ -216,8 +217,8 @@ const Game = (() => {
                                      (fastCount * fastHealth) + 
                                      (heavyCount * heavyHealth);
                     
-                    // Multiplicar por el nivel al cuadrado (dos veces el nivel)
-                    bossHealth *= levelInfo.level * levelInfo.level;
+                    // Multiplicar por el nivel una sola vez
+                    bossHealth *= levelInfo.level;
                     
                     spawnState.waveTotalHealth = bossHealth;
                 }
@@ -249,8 +250,9 @@ const Game = (() => {
         while (spawnState.spawnTimer >= spawnState.spawnInterval && spawnState.enemiesToSpawn > 0) {
             spawnState.spawnTimer -= spawnState.spawnInterval;
 
-            // Si es oleada boss, spawner un solo boss
+            // Si es oleada boss, spawner boss y luego elite
             if (isBossWave && spawnState.spawnedMinions === 0) {
+                // Spawnear el boss
                 const bossHealth = spawnState.waveTotalHealth;
                 const boss = EnemySystem.createEnemy('boss', bossHealth);
                 
@@ -258,6 +260,20 @@ const Game = (() => {
                 boss.speed *= levelInfo.enemySpeed;
                 
                 EnemySystem.addEnemy(boss);
+                gameState.currentWaveEnemies++;
+                gameState.totalEnemiesSpawned++;
+                spawnState.spawnedMinions++;
+                spawnState.enemiesToSpawn--;
+            } else if (isBossWave && spawnState.spawnedMinions > 0 && spawnState.spawnedMinions <= levelInfo.level) {
+                // Spawnear elites que acompañan al boss (cantidad = nivel)
+                const elite = EnemySystem.createEnemy('elite');
+                
+                // Aplicar modificadores del nivel al elite
+                elite.speed *= levelInfo.enemySpeed;
+                elite.health *= levelInfo.enemyHealth;
+                elite.maxHealth = elite.health;
+                
+                EnemySystem.addEnemy(elite);
                 gameState.currentWaveEnemies++;
                 gameState.totalEnemiesSpawned++;
                 spawnState.spawnedMinions++;

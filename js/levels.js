@@ -135,13 +135,15 @@ const LevelSystem = (() => {
      * Calcular número de enemigos para la onda actual
      */
     const getEnemyCount = () => {
-        // Base: 3 enemigos
-        // Incremento: 2 enemigos por nivel (muy lento)
-        // Variación: +1 por onda
-        const baseEnemies = 3;
-        const levelMultiplier = (currentLevel - 1) * 2;
-        const waveBonus = currentWave * 1;
-        return Math.min(baseEnemies + levelMultiplier + waveBonus, 30);
+        // 5 enemigos normales + 1 elite por oleada, acumulativo entre niveles
+        // Onda 1: 5 enemigos
+        // Onda 2: 10 enemigos (5 + 5)
+        // Onda 3: 15 enemigos (5 + 5 + 5)
+        // Onda 4: 20 enemigos (5 + 5 + 5 + 5)
+        // Onda 5: 25 enemigos (5 + 5 + 5 + 5 + 5) - será reemplazado por boss
+        // Luego nivel sube y reinicia pero es acumulativo
+        const waveNumber = (currentLevel - 1) * 5 + currentWave; // Número total de oleadas jugadas
+        return waveNumber * 6; // 5 normales + 1 elite = 6 por oleada
     };
 
     /**
