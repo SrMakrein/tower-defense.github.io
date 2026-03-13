@@ -1,0 +1,33 @@
+{
+  "name": "Tower Defense ASCII",
+  "short_name": "TD-ASCII",
+  "description": "Un juego Tower Defense clásico con gráficos ASCII animados, desarrollado con HTML5, CSS3 y JavaScript vanilla. Juega directamente en tu navegador sin necesidad de instalación.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f0f1e",
+  "theme_color": "#00ff00",
+  "orientation": "landscape-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230f0f1e' width='192' height='192'/><text x='50%' y='50%' font-size='80' fill='%2300ff00' text-anchor='middle' dominant-baseline='central' font-family='monospace' font-weight='bold'>[T]</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%230f0f1e' width='512' height='512'/><text x='50%' y='50%' font-size='200' fill='%2300ff00' text-anchor='middle' dominant-baseline='central' font-family='monospace' font-weight='bold'>[T]</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["games"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%230f0f1e' width='540' height='720'/><text x='10' y='50' font-size='16' fill='%2300ff00' font-family='monospace'>TOWER DEFENSE ASCII</text><text x='10' y='100' font-size='12' fill='%2300ff00' font-family='monospace'>NIVEL: 5 | VIDAS: 15 | ORO: 350</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ]
+}

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense ASCII - Centro de Documentación</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #00ff00;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #0f0f1e;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 30px;
+        }
+        h1 {
+            color: #ffff00;
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #00ff00;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        h2 {
+            color: #00ff00;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+            margin: 30px 0 15px 0;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .doc-card {
+            background: #1a1a2e;
+            border: 1px solid #00ff00;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .doc-card:hover {
+            background: #2a2a3e;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        .doc-card h3 {
+            color: #ffff00;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .doc-card p {
+            font-size: 12px;
+            color: #00ff00;
+            line-height: 1.4;
+        }
+        .doc-card .icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .start-btn {
+            display: inline-block;
+            background: #00ff00;
+            color: #0a0a14;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        .start-btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            transform: scale(1.05);
+        }
+        .quick-links {
+            background: #1a1a2e;
+            border: 1px solid #00ff00;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .quick-links a {
+            color: #00ff00;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 8px;
+            padding: 5px 10px;
+            border: 1px solid #00ff00;
+            border-radius: 3px;
+            transition: all 0.2s ease;
+            font-size: 12px;
+        }
+        .quick-links a:hover {
+            background: #00ff00;
+            color: #0a0a14;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #00ff00;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a2e;
+            color: #ffff00;
+        }
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .status-ready {
+            background: #003300;
+            color: #00ff00;
+        }
+        .status-dev {
+            background: #003366;
+            color: #0099ff;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            border-top: 1px solid #00ff00;
+            padding-top: 20px;
+            font-size: 12px;
+            color: #00ff00;
+        }
+        .version {
+            background: #0a0a14;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            border-radius: 3px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 TOWER DEFENSE ASCII</h1>
+        <p class="subtitle">Centro de Documentación y Control</p>
+
+        <div class="version">
+            <strong>Versión 1.0.0</strong> | Marzo 2026 | Estado: <span class="status status-ready">LISTO</span>
+        </div>
+
+        <!-- JUGAR AHORA -->
+        <div class="section" style="text-align: center; background: #1a1a2e; padding: 20px; border: 2px solid #ffff00; border-radius: 4px;">
+            <h2 style="border: none; margin: 0 0 15px 0;">⚡ ¡JUEGA AHORA!</h2>
+            <a href="index.html" class="start-btn">🎮 INICIAR JUEGO</a>
+            <p style="margin-top: 15px; font-size: 12px;">O abre <code>index.html</code> directamente en tu navegador</p>
+        </div>
+
+        <!-- NAVEGACIÓN RÁPIDA -->
+        <div class="section">
+            <h2>🔗 Navegación Rápida</h2>
+            <div class="quick-links">
+                <a href="#documentacion">📖 Documentación</a>
+                <a href="#despliegue">🚀 Despliegue</a>
+                <a href="#desarrollo">⚙️ Desarrollo</a>
+                <a href="#caracteristicas">✨ Características</a>
+                <a href="#sobre-proyecto">ℹ️ Sobre el Proyecto</a>
+            </div>
+        </div>
+
+        <!-- DOCUMENTACIÓN -->
+        <div class="section" id="documentacion">
+            <h2>📖 Documentación</h2>
+            <p style="margin-bottom: 15px; font-size: 12px;">Accede a toda la información sobre el juego y cómo usarlo.</p>
+            
+            <div class="doc-grid">
+                <a href="README.md" class="doc-card" target="_blank">
+                    <div class="icon">📚</div>
+                    <h3>README Completo</h3>
+                    <p>Documentación completa en español: características, mecánicas, controles, solución de problemas.</p>
+                </a>
+
+                <a href="QUICKSTART.md" class="doc-card" target="_blank">
+                    <div class="icon">⚡</div>
+                    <h3>Guía Rápida</h3>
+                    <p>Comienza a jugar en minutos. Los primeros pasos, controles básicos y tips esenciales.</p>
+                </a>
+
+                <a href="FEATURES.html" class="doc-card" target="_blank">
+                    <div class="icon">✨</div>
+                    <h3>Características</h3>
+                    <p>Lista completa de características, torres, enemigos, sistema de niveles y arquitectura.</p>
+                </a>
+
+                <a href="PROJECT_SUMMARY.md" class="doc-card" target="_blank">
+                    <div class="icon">📊</div>
+                    <h3>Resumen del Proyecto</h3>
+                    <p>Estructura del proyecto, estadísticas de código, checklist y extensiones futuras.</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- DESPLIEGUE -->
+        <div class="section" id="despliegue">
+            <h2>🚀 Despliegue en GitHub Pages</h2>
+            <p style="margin-bottom: 15px; font-size: 12px;">Tu juego está listo para desplegar. Elige el método que prefieras.</p>
+            
+            <div class="doc-grid">
+                <a href="DEPLOYMENT.md" class="doc-card" target="_blank">
+                    <div class="icon">📤</div>
+                    <h3>Guía de Despliegue</h3>
+                    <p>3 métodos diferentes: GitHub Web, Git CLI y GitHub Desktop. Instrucciones paso a paso.</p>
+                </a>
+
+                <div class="doc-card">
+                    <div class="icon">🌐</div>
+                    <h3>URL Después de Despliegue</h3>
+                    <p><code>https://tu-usuario.github.io/tower-defense-ascii/</code><br><br>(Reemplaza "tu-usuario" con tu nombre de usuario de GitHub)</p>
+                </div>
+
+                <div class="doc-card">
+                    <div class="icon">⏱️</div>
+                    <h3>Tiempo de Despliegue</h3>
+                    <p>GitHub Pages tarda 2-5 minutos en procesar el sitio. Si no ves el juego inmediatamente, espera y recarga.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESARROLLO -->
+        <div class="section" id="desarrollo">
+            <h2>⚙️ Desarrollo y Personalización</h2>
+            <p style="margin-bottom: 15px; font-size: 12px;">Modifica el código para crear tu versión personalizada del juego.</p>
+            
+            <div class="doc-grid">
+                <a href="DEVELOPMENT.md" class="doc-card" target="_blank">
+                    <div class="icon">🔧</div>
+                    <h3>Guía de Desarrollo</h3>
+                    <p>Cómo funciona el código, cómo agregar torres, enemigos, efectos y cómo debuggear.</p>
+                </a>
+
+                <div class="doc-card">
+                    <div class="icon">📁</div>
+                    <h3>Estructura de Código</h3>
+                    <p><strong>6 módulos principales:</strong><br>game.js • engine.js • towers.js • enemies.js • levels.js • audio.js</p>
+                </div>
+
+                <div class="doc-card">
+                    <div class="icon">🛠️</div>
+                    <h3>Modificaciones Comunes</h3>
+                    <p>Cambiar dificultad, colores, símbolos ASCII, agregar torres nuevas, y más.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARACTERÍSTICAS -->
+        <div class="section" id="caracteristicas">
+            <h2>✨ Características Principales</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Estado</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sistema Tower Defense</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Colocación de torres, oleadas de enemigos, sistema de recursos</td>
+                    </tr>
+                    <tr>
+                        <td>4 Tipos de Torres</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Básica, Rápida, Potente, Hielo - cada una con mecánicas únicas</td>
+                    </tr>
+                    <tr>
+                        <td>Niveles Infinitos</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Dificultad progresiva sin límite. 5 ondas por nivel</td>
+                    </tr>
+                    <tr>
+                        <td>Gráficos ASCII</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Renderizado ASCII animado en tiempo real</td>
+                    </tr>
+                    <tr>
+                        <td>Web Audio API</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Sonidos procedurales para disparos, explosiones, etc.</td>
+                    </tr>
+                    <tr>
+                        <td>Game Loop 60 FPS</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Motor de juego optimizado con física y colisiones</td>
+                    </tr>
+                    <tr>
+                        <td>GitHub Pages</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>Sin backend, 100% HTML/CSS/JS vanilla</td>
+                    </tr>
+                    <tr>
+                        <td>Documentación</td>
+                        <td><span class="status status-ready">✅ LISTO</span></td>
+                        <td>README, QUICKSTART, DEPLOYMENT, DEVELOPMENT - todo en español</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SOBRE EL PROYECTO -->
+        <div class="section" id="sobre-proyecto">
+            <h2>ℹ️ Sobre el Proyecto</h2>
+            
+            <div style="background: #1a1a2e; border: 1px solid #00ff00; padding: 15px; border-radius: 4px; font-size: 12px;">
+                <p><strong>Nombre:</strong> Tower Defense ASCII</p>
+                <p><strong>Versión:</strong> 1.0.0</p>
+                <p><strong>Tipo de Proyecto:</strong> Juego Web Interactivo</p>
+                <p><strong>Tecnologías:</strong> HTML5 + CSS3 + JavaScript Vanilla</p>
+                <p><strong>Dependencias Externas:</strong> Ninguna (0 dependencias)</p>
+                <p><strong>Líneas de Código:</strong> ~2000 líneas</p>
+                <p><strong>Archivos:</strong> 14 archivos (HTML, CSS, JS, MD)</p>
+                <p><strong>Licencia:</strong> MIT</p>
+                <p><strong>Estado:</strong> <span class="status status-ready">PRODUCCIÓN</span> - Completamente funcional y listo para jugar</p>
+            </div>
+
+            <h3 style="color: #00ff00; margin-top: 20px;">📈 Estadísticas del Código</h3>
+            <table style="margin-top: 15px;">
+                <thead>
+                    <tr>
+                        <th>Archivo</th>
+                        <th>Líneas</th>
+                        <th>Propósito</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>js/game.js</td>
+                        <td>~450</td>
+                        <td>Controlador principal y lógica de juego</td>
+                    </tr>
+                    <tr>
+                        <td>js/engine.js</td>
+                        <td>~380</td>
+                        <td>Motor de juego, física, renderizado</td>
+                    </tr>
+                    <tr>
+                        <td>js/towers.js</td>
+                        <td>~260</td>
+                        <td>Sistema de torres y colocación</td>
+                    </tr>
+                    <tr>
+                        <td>js/enemies.js</td>
+                        <td>~320</td>
+                        <td>Sistema de enemigos y movimiento</td>
+                    </tr>
+                    <tr>
+                        <td>js/levels.js</td>
+                        <td>~160</td>
+                        <td>Sistema de niveles y dificultad</td>
+                    </tr>
+                    <tr>
+                        <td>js/audio.js</td>
+                        <td>~210</td>
+                        <td>Web Audio API y sonidos</td>
+                    </tr>
+                    <tr>
+                        <td>css/style.css</td>
+                        <td>~350</td>
+                        <td>Estilos retro neon y animaciones</td>
+                    </tr>
+                    <tr>
+                        <td>index.html</td>
+                        <td>~120</td>
+                        <td>Estructura HTML</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PRÓXIMOS PASOS -->
+        <div class="section">
+            <h2>🎯 Próximos Pasos</h2>
+            <ol style="margin-left: 20px; font-size: 12px; line-height: 1.8;">
+                <li><strong>Juega localmente:</strong> Abre index.html en tu navegador</li>
+                <li><strong>Lee la guía rápida:</strong> QUICKSTART.md para entender los controles</li>
+                <li><strong>Explora el código:</strong> DEVELOPMENT.md si quieres modificar el juego</li>
+                <li><strong>Despliega en GitHub:</strong> Sigue DEPLOYMENT.md para poner tu juego online</li>
+                <li><strong>Comparte con amigos:</strong> Dale tu URL de GitHub Pages</li>
+            </ol>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>🎮 <strong>Tower Defense ASCII</strong> | Desarrollado con HTML5 + CSS3 + JavaScript Vanilla</p>
+            <p>Completamente funcional • Sin dependencias • GitHub Pages ready • Abierto al desarrollo</p>
+            <p>Versión 1.0.0 | Marzo 2026 | ✨ Listo para producción</p>
+        </div>
+    </div>
+</body>
+</html>
