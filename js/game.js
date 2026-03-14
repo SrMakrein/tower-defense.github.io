@@ -228,8 +228,8 @@ const Game = (() => {
                 
                 // Iniciar la onda realmente
                 spawnState.waveActive = true;
-                // En oleadas boss: 1 boss + N elites (N = nivel). En oleadas normales: todos los minions
-                spawnState.enemiesToSpawn = isBossWave ? (1 + levelInfo.level) : levelInfo.enemyCount;
+                // En oleadas boss: 1 boss + N elites (N = nivel). En oleadas normales: todos los minions + 2 rápidos + 2 pesados adicionales
+                spawnState.enemiesToSpawn = isBossWave ? (1 + levelInfo.level) : (levelInfo.enemyCount + 4);
                 spawnState.originalEnemyCount = levelInfo.enemyCount; // Guardar para detectar barracones después
                 spawnState.spawnTimer = 0;
                 spawnState.waveTotalHealth = 0;
@@ -317,28 +317,37 @@ const Game = (() => {
                 spawnState.enemiesToSpawn--;
             } else if (!isBossWave) {
                 // Oleada normal: spawner minions
-                // Si hay más barracones que enemigos, spawner elite adicional
                 let enemyType = 'normal';
                 
-                if (shouldAddExtraElite && spawnState.spawnedMinions === spawnState.originalEnemyCount) {
-                    // Spawnear elite adicional
-                    enemyType = 'elite';
+                // Determinar si este es uno de los enemigos adicionales (rápidos o pesados)
+                const enemiesSpawnedSoFar = spawnState.spawnedMinions;
+                const originalEnemyCount = spawnState.originalEnemyCount;
+                const isAdditionalEnemy = enemiesSpawnedSoFar >= originalEnemyCount;
+                
+                if (isAdditionalEnemy) {
+                    // Los últimos 4 enemigos son: 2 rápidos + 2 pesados
+                    const additionalIndex = enemiesSpawnedSoFar - originalEnemyCount;
+                    if (additionalIndex < 2) {
+                        enemyType = 'fast';
+                    } else {
+                        enemyType = 'heavy';
+                    }
                 } else {
-                    // Variar tipo de enemigo según nivel y barracones
-                    const level = LevelSystem.getLevel();
-                    const barracksCount = TowerSystem.getTowers().filter(t => t.type === 'barracks').length;
-                    const rand = Math.random();
-
-                    // Probabilidad de elite aumenta con barracones
-                    if (barracksCount > 0 && rand < (0.1 * barracksCount)) {
+                    // Para los enemigos regulares (primeros enemyCount)
+                    // Si hay más barracones que enemigos, spawner elite adicional
+                    if (shouldAddExtraElite && spawnState.spawnedMinions === spawnState.originalEnemyCount) {
+                        // Spawnear elite adicional
                         enemyType = 'elite';
-                    } else if (level >= 2) {
-                        // A partir de nivel 2: 30% rápidos, 10% pesados, resto normales
-                        if (rand < 0.3) {
-                            enemyType = 'fast';
-                        } else if (rand < 0.4) {
-                            enemyType = 'heavy';
+                    } else {
+                        // Variar tipo de enemigo según nivel y barracones
+                        const level = LevelSystem.getLevel();
+                        const barracksCount = TowerSystem.getTowers().filter(t => t.type === 'barracks').length;
+
+                        // Probabilidad de elite aumenta con barracones
+                        if (barracksCount > 0 && Math.random() < (0.1 * barracksCount)) {
+                            enemyType = 'elite';
                         }
+                        // Si no es elite, será normal (se sortean rápidos y pesados en proporción fija)
                     }
                 }
 
