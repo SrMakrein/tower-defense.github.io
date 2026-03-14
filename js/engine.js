@@ -167,6 +167,8 @@ const GameEngine = (() => {
                 
                 if (destroyed) {
                     AudioManager.playEnemyDestroyed();
+                    // Agregar oro por matar enemigo
+                    Game.addGoldForKill(target);
                     return false;
                 }
 

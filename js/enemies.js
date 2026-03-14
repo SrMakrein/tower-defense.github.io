@@ -12,7 +12,7 @@ const EnemySystem = (() => {
             emoji: '👾',
             health: 1,
             speed: 2.0,
-            reward: 8,
+            reward: 10,
             armor: 0,
             spriteUrl: null
         },
@@ -22,7 +22,7 @@ const EnemySystem = (() => {
             emoji: '💨',
             health: 0.5,
             speed: 4.0,
-            reward: 12,
+            reward: 10,
             armor: 0,
             spriteUrl: null
         },
@@ -32,7 +32,7 @@ const EnemySystem = (() => {
             emoji: '🦾',
             health: 2,
             speed: 1.0,
-            reward: 20,
+            reward: 10,
             armor: 1,
             spriteUrl: null
         },
@@ -42,7 +42,7 @@ const EnemySystem = (() => {
             emoji: '👹',
             health: 2,
             speed: 2.0,
-            reward: 200,
+            reward: 25,
             armor: 0,
             spriteUrl: null,
             isElite: true
@@ -53,7 +53,7 @@ const EnemySystem = (() => {
             emoji: '👿',
             health: 0, // Se asigna dinámicamente
             speed: 1.5,
-            reward: 500,
+            reward: 50,
             armor: 0,
             spriteUrl: null,
             isBoss: true,

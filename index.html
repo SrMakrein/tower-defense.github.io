@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tower Defense ASCII - Un juego clásico de defensa con gráficos ASCII animados. Coloca torres y defiende tu base. Compatible con GitHub Pages.">
+    <meta name="description" content="Tower Defense - Un juego clásico de defensa. Coloca torres y defiende tu base. Compatible con GitHub Pages.">
     <meta name="theme-color" content="#00ff00">
-    <title>Tower Defense ASCII - Juego de Defensa</title>
+    <title>Tower Defense - Juego de Defensa</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230f0f1e' width='100' height='100'/><text x='50' y='60' font-size='60' fill='%2300ff00' text-anchor='middle' font-family='monospace' font-weight='bold'>[T]</text></svg>">
 </head>
 <body>
     <div id="gameContainer" class="game-container">
@@ -86,6 +85,33 @@
                 </div>
                 <button id="closeUpgradeBtn" class="btn btn-secondary">Cerrar</button>
             </div>
+
+            <!-- Botón de logros -->
+            <div class="achievements-button-container">
+                <button id="achievementsBtn" class="btn btn-achievements">🏆 Logros</button>
+            </div>
+        </div>
+
+        <!-- Modal de logros (oculto por defecto) -->
+        <div id="achievementsModal" class="achievements-modal" style="display: none;">
+            <div class="achievements-content">
+                <div class="achievements-header">
+                    <h1>🏆 LOGROS Y OBJETIVOS</h1>
+                    <button id="closeAchievementsBtn" class="btn btn-close">✕</button>
+                </div>
+                
+                <div class="achievements-scroll">
+                    <div id="achievementsContainer" class="achievements-grid">
+                        <!-- Se genera dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="achievements-footer">
+                    <p id="achievementsStats" class="achievements-stats">
+                        <!-- Se actualiza dinámicamente -->
+                    </p>
+                </div>
+            </div>
         </div>
 
         <!-- Área de renderizado del juego -->
@@ -100,6 +126,7 @@
     <script src="js/towers.js"></script>
     <script src="js/enemies.js"></script>
     <script src="js/engine.js"></script>
+    <script src="js/achievements.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>

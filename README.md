@@ -1,11 +1,10 @@
-# Tower Defense ASCII 🎮
+# Tower Defense 🎮
 
-Un **juego Tower Defense completo** desarrollado en **HTML5, CSS3 y JavaScript vanilla**, renderizado con **gráficos ASCII animados**. Totalmente compatible con **GitHub Pages** - no requiere servidor backend.
+Un **juego Tower Defense completo** desarrollado en **HTML5, CSS3 y JavaScript vanilla**. Totalmente compatible con **GitHub Pages** - no requiere servidor backend.
 
 ## 🌟 Características
 
 - ✅ **Sistema Tower Defense clásico** - coloca torres para defender tu base
-- ✅ **Gráficos ASCII animados** - representación visual en tiempo real con caracteres ASCII
 - ✅ **Niveles infinitos** - dificultad progresiva sin límite
 - ✅ **5 ondas por nivel** - generación procedural de enemigos
 - ✅ **4 tipos de torres** - cada una con mecánicas únicas

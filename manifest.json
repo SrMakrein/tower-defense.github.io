@@ -1,7 +1,7 @@
 {
-  "name": "Tower Defense ASCII",
-  "short_name": "TD-ASCII",
-  "description": "Un juego Tower Defense clásico con gráficos ASCII animados, desarrollado con HTML5, CSS3 y JavaScript vanilla. Juega directamente en tu navegador sin necesidad de instalación.",
+  "name": "Tower Defense",
+  "short_name": "TD",
+  "description": "Un juego Tower Defense clásico desarrollado con HTML5, CSS3 y JavaScript vanilla. Juega directamente en tu navegador sin necesidad de instalación.",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0f0f1e",

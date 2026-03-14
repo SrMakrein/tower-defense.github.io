@@ -34,7 +34,12 @@ const Game = (() => {
         resetBtn: null,
         towerBtns: {},
         upgradePanel: null,
-        upgradeButtons: {}
+        upgradeButtons: {},
+        achievementsBtn: null,
+        achievementsModal: null,
+        closeAchievementsBtn: null,
+        achievementsContainer: null,
+        achievementsStats: null
     };
 
     // Control de spawning de enemigos
@@ -68,6 +73,11 @@ const Game = (() => {
         domElements.pauseBtn = document.getElementById('pauseBtn');
         domElements.resetBtn = document.getElementById('resetBtn');
         domElements.upgradePanel = document.getElementById('upgradePanel');
+        domElements.achievementsBtn = document.getElementById('achievementsBtn');
+        domElements.achievementsModal = document.getElementById('achievementsModal');
+        domElements.closeAchievementsBtn = document.getElementById('closeAchievementsBtn');
+        domElements.achievementsContainer = document.getElementById('achievementsContainer');
+        domElements.achievementsStats = document.getElementById('achievementsStats');
 
         // Obtener botones de torres
         const towerBtns = document.querySelectorAll('.tower-btn');
@@ -109,6 +119,21 @@ const Game = (() => {
             closeUpgradeBtn.addEventListener('click', () => {
                 domElements.upgradePanel.style.display = 'none';
                 gameState.selectedTowerObj = null;
+            });
+        }
+
+        // Botones de logros
+        if (domElements.achievementsBtn) {
+            domElements.achievementsBtn.addEventListener('click', openAchievements);
+        }
+        if (domElements.closeAchievementsBtn) {
+            domElements.closeAchievementsBtn.addEventListener('click', closeAchievements);
+        }
+        if (domElements.achievementsModal) {
+            domElements.achievementsModal.addEventListener('click', (e) => {
+                if (e.target === domElements.achievementsModal) {
+                    closeAchievements();
+                }
             });
         }
 
@@ -439,6 +464,109 @@ const Game = (() => {
     };
 
     /**
+     * Abrir modal de logros
+     */
+    const openAchievements = () => {
+        if (!gameState.gameRunning) return;
+        
+        // Pausar juego
+        if (!GameEngine.getState().paused) {
+            GameEngine.togglePause();
+            domElements.pauseBtn.textContent = 'Reanudar';
+        }
+        
+        // Mostrar modal
+        domElements.achievementsModal.style.display = 'flex';
+        updateAchievementsDisplay();
+    };
+
+    /**
+     * Cerrar modal de logros
+     */
+    const closeAchievements = () => {
+        domElements.achievementsModal.style.display = 'none';
+        
+        // Reanudar juego si está pausado
+        if (GameEngine.getState().paused) {
+            GameEngine.togglePause();
+            domElements.pauseBtn.textContent = 'Pausar';
+        }
+    };
+
+    /**
+     * Actualizar display de logros
+     */
+    const updateAchievementsDisplay = () => {
+        const achievements = AchievementSystem.getAchievements();
+        const progress = AchievementSystem.getProgress();
+        
+        domElements.achievementsContainer.innerHTML = '';
+
+        Object.values(achievements).forEach((achievement) => {
+            const card = document.createElement('div');
+            card.className = 'achievement-card';
+            
+            let levelsHTML = '';
+            let totalCompleted = 0;
+            
+            achievement.levels.forEach((level) => {
+                let currentProgress = 0;
+                
+                // Obtener progreso actual
+                if (achievement.type === 'enemy_kills') {
+                    currentProgress = progress.totalEnemies;
+                } else if (achievement.type === 'enemy_type') {
+                    currentProgress = progress.enemyKillsByType[achievement.enemyType] || 0;
+                } else if (achievement.type === 'tower_type') {
+                    currentProgress = progress.towersByType[achievement.towerType] || 0;
+                }
+                
+                const percentage = Math.min(100, (currentProgress / level.threshold) * 100);
+                const isCompleted = level.completed;
+                
+                if (isCompleted) totalCompleted++;
+                
+                levelsHTML += `
+                    <div class="achievement-level ${isCompleted ? 'completed' : ''}">
+                        <div>
+                            <span class="achievement-level-name">${level.reward}</span>
+                            <span class="achievement-counter">${currentProgress}/${level.threshold}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            card.innerHTML = `
+                <div class="achievement-header">
+                    <span class="achievement-emoji">${achievement.emoji}</span>
+                    <span class="achievement-title">${achievement.name}</span>
+                </div>
+                <div class="achievement-description">${achievement.description}</div>
+                <div class="achievement-levels">
+                    ${levelsHTML}
+                </div>
+            `;
+            
+            domElements.achievementsContainer.appendChild(card);
+        });
+        
+        // Actualizar estadísticas
+        const totalLevels = Object.values(achievements).reduce((sum, ach) => sum + ach.levels.length, 0);
+        const completedLevels = Object.values(achievements).reduce((sum, ach) => 
+            sum + ach.levels.filter(l => l.completed).length, 0
+        );
+        
+        domElements.achievementsStats.innerHTML = `
+            ${completedLevels} / ${totalLevels} logros completados | 
+            Enemigos: ${progress.totalEnemies} | 
+            Torres: ${Object.values(progress.towersByType).reduce((a, b) => a + b, 0)}
+        `;
+    };
+
+    /**
      * Seleccionar tipo de torre
      */
     const selectTower = (towerType) => {
@@ -468,6 +596,16 @@ const Game = (() => {
         });
 
         showMessage(`Torre ${towerData.name} seleccionada. Click para colocar.`);
+    };
+
+    /**
+     * Agregar oro por matar enemigo
+     */
+    const addGoldForKill = (enemy) => {
+        gameState.gold += enemy.reward;
+        showMessage(`+${enemy.reward} O (${enemy.symbol})`);
+        // Registrar en logros
+        AchievementSystem.recordEnemyKill(enemy.type);
     };
 
     /**
@@ -551,6 +689,8 @@ const Game = (() => {
                 TowerSystem.removeTower(tower.id);
                 gameState.gold += refund;
                 showMessage(`Torre demolida. Oro recuperado: +${refund}`);
+                // Registrar demolición en logros
+                AchievementSystem.recordTowerDemolished(tower.type);
                 domElements.upgradePanel.style.display = 'none';
                 gameState.selectedTowerObj = null;
             });
@@ -625,6 +765,8 @@ const Game = (() => {
             TowerSystem.removeTower(tower.id);
             gameState.gold += refund;
             showMessage(`Torre demolida. Recuperado ${refund} oro.`);
+            // Registrar demolición en logros
+            AchievementSystem.recordTowerDemolished(tower.type);
             domElements.upgradePanel.style.display = 'none';
             gameState.selectedTowerObj = null;
         });
@@ -690,6 +832,9 @@ const Game = (() => {
 
         // Restar oro
         gameState.gold -= towerData.cost;
+        
+        // Registrar en logros
+        AchievementSystem.recordTowerBuilt(towerType);
 
         return true;
     };
@@ -720,6 +865,7 @@ const Game = (() => {
         EnemySystem.clearEnemies();
         TowerSystem.clearTowers();
         GameEngine.clearDynamics();
+        AchievementSystem.reset();
 
         // Resetear estado
         gameState.selectedTower = null;
@@ -814,7 +960,8 @@ const Game = (() => {
     };
 
     return {
-        init
+        init,
+        addGoldForKill
     };
 })();
 
