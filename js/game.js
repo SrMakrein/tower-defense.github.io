@@ -39,7 +39,9 @@ const Game = (() => {
         achievementsModal: null,
         closeAchievementsBtn: null,
         achievementsContainer: null,
-        achievementsStats: null
+        achievementsStats: null,
+        startOverlay: null,
+        startGameBtn: null
     };
 
     // Control de spawning de enemigos
@@ -78,6 +80,8 @@ const Game = (() => {
         domElements.closeAchievementsBtn = document.getElementById('closeAchievementsBtn');
         domElements.achievementsContainer = document.getElementById('achievementsContainer');
         domElements.achievementsStats = document.getElementById('achievementsStats');
+        domElements.startOverlay = document.getElementById('startOverlay');
+        domElements.startGameBtn = document.getElementById('startGameBtn');
 
         // Obtener botones de torres
         const towerBtns = document.querySelectorAll('.tower-btn');
@@ -107,6 +111,11 @@ const Game = (() => {
         domElements.startBtn.addEventListener('click', startGame);
         domElements.pauseBtn.addEventListener('click', togglePause);
         domElements.resetBtn.addEventListener('click', resetGame);
+
+        // Botón de overlay de inicio
+        if (domElements.startGameBtn) {
+            domElements.startGameBtn.addEventListener('click', hideStartOverlay);
+        }
 
         // Botones de torres
         Object.entries(domElements.towerBtns).forEach(([towerType, btn]) => {
@@ -157,6 +166,9 @@ const Game = (() => {
      */
     const startGame = () => {
         if (gameState.gameRunning) return;
+
+        // Ocultar overlay de inicio
+        hideStartOverlay();
 
         gameState.gameRunning = true;
         gameState.gameOver = false;
@@ -490,6 +502,24 @@ const Game = (() => {
         if (GameEngine.getState().paused) {
             GameEngine.togglePause();
             domElements.pauseBtn.textContent = 'Pausar';
+        }
+    };
+
+    /**
+     * Mostrar overlay de inicio
+     */
+    const showStartOverlay = () => {
+        if (domElements.startOverlay) {
+            domElements.startOverlay.classList.remove('hidden');
+        }
+    };
+
+    /**
+     * Ocultar overlay de inicio
+     */
+    const hideStartOverlay = () => {
+        if (domElements.startOverlay) {
+            domElements.startOverlay.classList.add('hidden');
         }
     };
 
@@ -877,6 +907,9 @@ const Game = (() => {
         domElements.pauseBtn.textContent = 'Pausar';
 
         Object.values(domElements.towerBtns).forEach(btn => btn.classList.remove('selected'));
+
+        // Mostrar overlay de inicio
+        showStartOverlay();
 
         showMessage('Juego reiniciado');
         render();

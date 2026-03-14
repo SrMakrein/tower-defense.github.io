@@ -17,6 +17,241 @@ body {
 }
 
 /* ============================================
+   OVERLAY DE INICIO
+   ============================================ */
+
+.start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f0f1e;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.start-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.start-overlay-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor de enemigos animados */
+.animated-enemies-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 0.3;
+}
+
+.enemy-animated {
+    position: absolute;
+    font-size: 48px;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 20s infinite ease-in-out;
+}
+
+/* Diferentes animaciones para cada enemigo */
+.enemy-animated-1 {
+    font-size: 64px;
+    top: 10%;
+    left: 10%;
+    animation: float 25s infinite ease-in-out, pulse 4s infinite;
+    animation-delay: 0s;
+}
+
+.enemy-animated-2 {
+    font-size: 48px;
+    top: 20%;
+    right: 15%;
+    animation: float 22s infinite ease-in-out 1s;
+    animation-delay: -2s;
+}
+
+.enemy-animated-3 {
+    font-size: 56px;
+    top: 40%;
+    left: 5%;
+    animation: float 28s infinite ease-in-out -3s;
+    animation-delay: -3s;
+}
+
+.enemy-animated-4 {
+    font-size: 52px;
+    top: 60%;
+    right: 10%;
+    animation: float 26s infinite ease-in-out -5s;
+    animation-delay: -1s;
+}
+
+.enemy-animated-5 {
+    font-size: 44px;
+    bottom: 15%;
+    left: 20%;
+    animation: float 24s infinite ease-in-out -7s;
+    animation-delay: 0s;
+}
+
+.enemy-animated-6 {
+    font-size: 60px;
+    bottom: 20%;
+    right: 20%;
+    animation: float 23s infinite ease-in-out -4s;
+    animation-delay: -2s;
+}
+
+.enemy-animated-7 {
+    font-size: 50px;
+    top: 30%;
+    left: 50%;
+    animation: float 27s infinite ease-in-out -6s;
+    animation-delay: -3s;
+}
+
+.enemy-animated-8 {
+    font-size: 58px;
+    top: 70%;
+    left: 70%;
+    animation: float 25s infinite ease-in-out -2s;
+    animation-delay: -1s;
+}
+
+.enemy-animated-9 {
+    font-size: 46px;
+    bottom: 30%;
+    right: 40%;
+    animation: float 21s infinite ease-in-out -8s;
+    animation-delay: 0s;
+}
+
+.enemy-animated-10 {
+    font-size: 54px;
+    top: 50%;
+    right: 30%;
+    animation: float 29s infinite ease-in-out -4s;
+    animation-delay: -2s;
+}
+
+/* Animaciones */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.3;
+    }
+    25% {
+        transform: translateY(-30px) translateX(20px) scale(1.05);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-60px) translateX(-20px) scale(0.95);
+        opacity: 0.4;
+    }
+    75% {
+        transform: translateY(-30px) translateX(40px) scale(1.08);
+        opacity: 0.45;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* Contenido del overlay */
+.start-overlay-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    background: rgba(15, 15, 30, 0.85);
+    border: 3px solid #00ff00;
+    border-radius: 12px;
+    padding: 60px 80px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 50px rgba(0, 255, 0, 0.3);
+    animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.start-title {
+    font-size: 48px;
+    color: #ffff00;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.start-subtitle {
+    font-size: 18px;
+    color: #00ff00;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.btn-start-game {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    color: #0f0f1e;
+    border: 3px solid #00ff00;
+    padding: 20px 60px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-start-game:hover {
+    background: linear-gradient(135deg, #00cc00 0%, #00ff00 100%);
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.8);
+}
+
+.btn-start-game:active {
+    transform: scale(0.95);
+}
+
+.start-info {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #888888;
+    opacity: 0.7;
+}
+
+/* ============================================
    CONTENEDOR PRINCIPAL DEL JUEGO
    ============================================ */
 
