@@ -21,7 +21,7 @@ const EnemySystem = (() => {
             symbol: 'e',
             emoji: '💨',
             health: 0.5,
-            speed: 4.0,
+            speed: 3.0,
             reward: 10,
             armor: 0,
             spriteUrl: null
@@ -30,9 +30,9 @@ const EnemySystem = (() => {
             id: 'heavy',
             symbol: 'H',
             emoji: '🦾',
-            health: 2,
+            health: 8,
             speed: 1.0,
-            reward: 10,
+            reward: 5,
             armor: 1,
             spriteUrl: null
         },

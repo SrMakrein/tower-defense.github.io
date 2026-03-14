@@ -327,14 +327,18 @@ const Game = (() => {
                     // Variar tipo de enemigo según nivel y barracones
                     const level = LevelSystem.getLevel();
                     const barracksCount = TowerSystem.getTowers().filter(t => t.type === 'barracks').length;
+                    const rand = Math.random();
 
                     // Probabilidad de elite aumenta con barracones
-                    if (barracksCount > 0 && Math.random() < (0.1 * barracksCount)) {
+                    if (barracksCount > 0 && rand < (0.1 * barracksCount)) {
                         enemyType = 'elite';
-                    } else if (level > 10 && Math.random() < 0.3) {
-                        enemyType = 'fast';
-                    } else if (level > 20 && Math.random() < 0.2) {
-                        enemyType = 'heavy';
+                    } else if (level >= 2) {
+                        // A partir de nivel 2: 30% rápidos, 10% pesados, resto normales
+                        if (rand < 0.3) {
+                            enemyType = 'fast';
+                        } else if (rand < 0.4) {
+                            enemyType = 'heavy';
+                        }
                     }
                 }
 

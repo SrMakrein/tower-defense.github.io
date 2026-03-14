@@ -150,6 +150,22 @@ body {
     animation-delay: -2s;
 }
 
+.enemy-animated-11 {
+    font-size: 52px;
+    bottom: 25%;
+    left: 40%;
+    animation: float 26s infinite ease-in-out -5s;
+    animation-delay: -1s;
+}
+
+.enemy-animated-12 {
+    font-size: 48px;
+    top: 15%;
+    left: 35%;
+    animation: float 24s infinite ease-in-out -3s;
+    animation-delay: 0s;
+}
+
 /* Animaciones */
 @keyframes float {
     0%, 100% {

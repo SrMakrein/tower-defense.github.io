@@ -35,9 +35,11 @@ Detén los enemigos que avanzan por el camino antes de que lleguen al final. Def
 | **Hielo [I]** | 100 | 0.5 | Normal | Ralentiza enemigos |
 
 **Enemigos**
-- `E` - Enemigo normal (1 vida, velocidad 1x)
-- `e` - Enemigo rápido (0.5 vida, velocidad 2x) - aparece en nivel 10+
-- `H` - Enemigo pesado (3 vida, velocidad 0.5x) - aparece en nivel 20+
+- `E` - Enemigo normal (1 vida, velocidad 1x, 10 oro)
+- `e` - Enemigo rápido (0.5 vida, velocidad 1.5x, 10 oro) - 30% de spawn desde nivel 2
+- `H` - Enemigo pesado (8 vida, velocidad 0.5x, 5 oro) - 10% de spawn desde nivel 2
+- `X` - Enemigo élite (2 vida, velocidad 1x, 25 oro) - aparece con barracones
+- `B` - Boss (salud variable, 50 oro) - aparece cada 5 ondas
 
 ### Controles
 
